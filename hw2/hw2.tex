@@ -1,0 +1,91 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{txfonts}
+\usepackage{titlesec}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{pdfpages}
+
+\setlength{\parskip}{\baselineskip}%
+\setlength{\parindent}{0pt}%
+
+\title{Homework 2}
+\author{Daniel Hartig}
+
+
+\begin{document}
+\maketitle
+
+\titlespacing{\subsection}{0pt}{0pt}{0pt}
+\titlespacing{\subsubsection}{0pt}{0pt}{-\parskip}
+
+\subsection*{Problem 3.3}
+\subsubsection*{a., b., c.}
+For a 95\% confidence interval, $\alpha/2 = 0.025$ and $z_{\alpha/2} = -1.960$. 
+\begin{align*}
+\log\hat{\theta} &= \log\left(\frac{60(61)}{2(44)}\right) = 3.728 \\
+\hat{\sigma}\left(\log\hat{\theta}\right) &= \sqrt{\frac{1}{60} + \frac{1}{61} + \frac{1}{2} + \frac{1}{44}} = .746\\ 
+\log \hat{\theta} \pm z_{\alpha/2}\hat{\sigma}\left(\log\hat{\theta}\right) &=3.728 \pm 1.960(0.746) = (2.267,5.189)  \\
+\text{Confidence Interval}[\hat{\theta}] &= (e^{2.267}, e^{5.189}) = (9.648, 179.299)
+\end{align*}
+The main factor causing the confidence interval to be so large is the sample of two in the category of "Strong Republican, Strong Agree." In the calculation of standard error, it can be seen that the term $1/2$ dominates within the square root.
+
+\subsection*{Problem 3.4}
+\subsubsection*{a. Odds Ratio}
+\begin{align*}
+\log \hat{\theta} &= \log\left(\frac{1085(441239)}{703(55623)}\right) = 2.505 \\
+\hat{\sigma}\left(\log\hat{\theta}\right) &= \sqrt{\frac{1}{1085}+\frac{1}{55623}+\frac{1}{703}+\frac{1}{441239}} = 0.0486 \\
+\log \hat{\theta} \pm z_{\alpha/2}\hat{\sigma}\left(\log\hat{\theta}\right) &= 2.505 \pm 1.960(0.0486) = (2.464, 2.546) \\
+\text{Confidence Interval}[\hat{\theta}] &= (e^{2.464}, e^{2.546}) = (11.756, 12.751)
+\end{align*}
+A driver or passenger involved in an auto accident is between 11.8 and 12.8 times more likely to become a fatality if that person is not wearing a seat-belt compared to if that person is wearing a seat belt. 
+\subsubsection*{b. Difference of Proportions}
+Let $\hat\pi_{no}$ be the probability of a fatality for a driver or passenger not using a seat-belt and $\hat\pi_{yes}$ be the probability if using a seat-belt.
+\begin{align*}
+\hat\pi_{no} &= \frac{y_{no}}{n_{no}} = \frac{1085}{1085+55623} =  0.0191 \\
+\hat\pi_{yes} &= \frac{y_{yes}}{n_{yes}} = \frac{703}{703+441239} = 0.00159 \\
+\hat\pi_{no} - \hat\pi_{yes} &= 0.0191 - 0.00159 = 0.0175 \\
+\hat\sigma\left(\hat\pi_{no} - \hat\pi_{yes}\right) &=  \sqrt{\frac{\hat\pi_{no}(1-\hat\pi_{no})}{n_{no}} + \frac{\hat\pi_{no}(1-\hat\pi_{no})}{n_{no}}} = \sqrt{\frac{0.0191(1-0.0191)}{55623}+\frac{0.00159(1-.00159)}{441239}} = 0.000584 \\
+\text{Confidence Interval}[\hat\pi_{no} - \hat\pi_{yes}] &= \hat\pi_{no} - \hat\pi_{yes} \pm z_{\alpha/2}\hat\sigma\left(\hat\pi_{no} - \hat\pi_{yes}\right) = 0.0175 \pm 1.960(0.000584) = (0.0164, 0.0187)
+\end{align*}
+A driver or passenger involved in an auto accident is between 1.6 and 1.9 percentage points more likely to become a fatality if that person is not wearing a seat-belt compared to if that person is wearing a seat belt.
+\subsubsection*{c. Relative Risk}
+\begin{align*}
+\log r &= \log\left(\frac{\hat\pi_{no}}{\hat\pi_{yes}}\right) = \log\left(\frac{0.0191}{0.00159}\right) = 2.487 \\
+\hat\sigma\left(\log r\right) &= \sqrt{\frac{1-\hat\pi_{no}}{y_{no}} + \frac{1-\hat\pi_{yes}}{y_{yes}}} = \sqrt{\frac{1-.0191}{1085}+\frac{1-.00159}{703}} = 0.0482 \\
+\log r \pm z_{\alpha/2}\hat\sigma\left(\log r\right) &= 2.505 \pm 1.960 (0.0482) = (2.410, 2.599) \\
+\text{Confidence Interval}[r] &= (e^{2.410}, e^{2.599}) = (10.943, 13.220)
+\end{align*}
+A driver of passenger involved in an auto accident is between 10.9 and 13.2 times more likely to become a fatality if that person is not wearing a seat belt compared to all people involved in car accidents. The reason this number is so close to the values obtained in the Odds Ratio confidence interval is that the probability of becoming a fatality is low, so the number of non-fatal accidents and the number of total accidents are close. 
+
+\subsection{Problem 3.9}
+The 2014 edition of the GSS yielded the following table for the variables "EDUCATION" and "FUND"
+\begin{center}
+\begin{tabular}{l c c c r}
+&Fundamentalist&Moderate&Liberal&Row Total \\
+K-12&307&461&270&1038 \\
+13-18&262&508&472&1242 \\
+19 or greater&16&56&69&141 \\
+Column Total&585&1025&811&2421 
+\end{tabular}
+\end{center}
+Solved using python 3.5 code attached at end of assignment. 
+\subsubsection{a.}
+The $X^2$ statistic is 63.822 with p-value $4.556\times10^{-13}$. The $G^2$ statistic is 65.443 with p-value $2.075\times10^{-13}$. There are 4 degrees of freedom. Because of the very high p-values, we have very high confidence that education and fundamentalism are not independent variables. 
+\subsubsection{b.} 
+There is clear relationship between the fundamentalist and liberal positions and having or not having a college education. The number of fundamentalists with no college education is 5.39 standard deviations above expected, while the number of  fundamentalists with a college education is 3.62 stdev below expected and graduate school is 3.66 stdev below expected. Conversely, the number of liberals with no college education is 6.76 stdev lower than expected while the number of liberals with a college education is 4.81 stdev above expected and grad school is 4.00 stdev above expected.
+
+The moderate position has a similar relationship to the fundamentalist, but with a weaker relationship. There is limited difference in the ideologies of those people who have been to college, and those who have been to graduate school. Overall, it appears that fundamentalism is more likely in those without college education and liberalism is more likely in those with college education. 
+
+\subsection{Problem 3.
+
+
+
+\includepdf{Stat+665+HW2+Prob+3_9.pdf}
+
+
+
+
+
+
+\end{document}
