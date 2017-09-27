@@ -73,13 +73,74 @@ Solved using python 3.5 code attached at end of assignment.
 \subsubsection{a.}
 The $X^2$ statistic is 63.822 with p-value $4.556\times10^{-13}$. The $G^2$ statistic is 65.443 with p-value $2.075\times10^{-13}$. There are 4 degrees of freedom. Because of the very high p-values, we have very high confidence that education and fundamentalism are not independent variables. 
 \subsubsection{b.} 
-There is clear relationship between the fundamentalist and liberal positions and having or not having a college education. The number of fundamentalists with no college education is 5.39 standard deviations above expected, while the number of  fundamentalists with a college education is 3.62 stdev below expected and graduate school is 3.66 stdev below expected. Conversely, the number of liberals with no college education is 6.76 stdev lower than expected while the number of liberals with a college education is 4.81 stdev above expected and grad school is 4.00 stdev above expected.
+There is a clear relationship between the fundamentalist and liberal positions and having or not having a college education. The number of fundamentalists with no college education is 5.39 standard deviations above expected, while the number of  fundamentalists with a college education is 3.62 stdev below expected and graduate school is 3.66 stdev below expected. Conversely, the number of liberals with no college education is 6.76 stdev lower than expected while the number of liberals with a college education is 4.81 stdev above expected and grad school is 4.00 stdev above expected.
 
-The moderate position has a similar relationship to the fundamentalist, but with a weaker relationship. There is limited difference in the ideologies of those people who have been to college, and those who have been to graduate school. Overall, it appears that fundamentalism is more likely in those without college education and liberalism is more likely in those with college education. 
+The moderate position has a similar relationship to education as the fundamentalist, but this relationship is weaker. There is limited difference in the ideologies of those people who have been to college, and those who have been to graduate school. Overall, the significant finding is that fundamentalism is more likely in those without college education and liberalism is more likely in those with college education. 
 
-\subsection{Problem 3.
+\subsection{Problem 3.31}
+\subsubsection{a.}
+For the given table, the marginal distributions in both directions for the given table are 
+\begin{align*}
+\pi_{1+} &= \pi_{+1} = \theta^2 + \theta(1-\theta) = \theta \\
+\pi_{2+} &= \pi_{+2} = (1-\theta)^2 + \theta(1-\theta) = 1-\theta \\
+\end{align*}
+so that the resulting table with marginals is 
+\begin{center}
+\begin{tabular}{lccc}
+&Success in $j$&Failure in $j$&Marginal in $j$\\
+Success in $i$&$\theta^2$&$\theta(1-\theta)$&$\theta$ \\ 
+Failure in $i$&$\theta(1-\theta)$&$(1-\theta)^2$&$(1-\theta)$ \\ 
+Marginal in $i$&$\theta$&$(1-\theta)$&1 \\
+\end{tabular}
+\end{center}
+To prove independence, we calculate $\pi_{ij}$ from the marginals for all entries of the table and verify that we see the expected values in the table.
+\begin{align*}
+\pi_{11} &= \theta^2 = \theta(\theta) = \pi_{1+}\pi_{+1} \\
+\pi_{12} = \pi_{21} &= \theta(1-\theta) = \pi{1+}\pi{+2} = \pi{+1}\pi{2+} \\
+\pi_{22} &= (1-\theta)^2 = (1-\theta)(1-\theta)= \pi_{2+}\pi_{+2}
+\end{align*}
+\subsubsection{b.}
+Since $\hat\theta$ represents the overall proportion of expected successes of either trial $i$ or trial $j$, it is represented by 
+\begin{align*}
+\hat\theta &= \frac{\hat n_1 + \hat n_2}{\hat n + \hat n} = \frac{1}{2}\left(\pi_1 + \pi_2\right) \\
+&= \frac{\pi_{1+}+\pi_{+1}}{2}
+\end{align*}
 
 
+\subsubsection{c.}
+To test a null hypothesis of independence, we use the Chi Squared test. The test statistic is 
+\[\chi^2 = \sum_{i}\sum_{j}\frac{\left(n_{ij}-E(n_{ij})\right)^2}{E(n_{ij})}\]
+If we divide through by $n$, the unknown sample size, we obtain an expression in terms of sample and expected proportions
+\[\chi^2 = \sum_{i}\sum_{j}\frac{\left(\pi_{ij}-\hat\pi_{ij}\right)^2}{\hat\pi_{ij}}.\]
+The degrees of freedom of a test of $H_0$ are $(I-1) + (J-1) = (2-1) + (2-1) = 2$. We expect the two degrees of freedom because the table is symmetrical in addition to being independent.
+We then find a p-value for the obtained test statistic with the given degrees of freedom and use our desired confidence level to determine whether or not to reject $H_0$.
+
+\subsubsection{d.}
+The contingency table of sampled shots in its proportional form is
+\begin{center}
+\begin{tabular}{lcc|c}
+&Made 2nd&Missed 2nd&\\
+Made 1st&0.661&0.143&0.804 \\ 
+Missed 1st&0.161&0.035&0.196 \\ \hline
+&0.822&0.178&1 \\ 
+\end{tabular}
+\end{center}
+The overall proportion of shots made is $0.813$, which is $\hat\theta$. Therefore, the expected shots table in proportional form is
+\begin{center}
+\begin{tabular}{lcc|c}
+&Made 2nd&Missed 2nd&\\
+Made 1st&0.661&0.152&0.813 \\ 
+Missed 1st&0.152&0.035&0.187 \\ \hline
+&0.813&0.187&1 \\ 
+\end{tabular}
+\end{center}
+The chi squared test statistic is
+\begin{align*}
+\chi^2 &= \frac{(0.661-0.661)^2}{0.661} + \frac{(0.143-0.152)^2}{0.152} + \frac{(0.161-0.152)^2}{0.152} + \frac{(0.035-0.035)^2}{0.035} \\
+&=4.379\times10^{-8} + 4.782\times10^{-4} + 5.171\times10^{-4} + 8.281\times10^{-7} \\
+&= 0.000996
+\end{align*}
+Since the p-value is so low we cannot reject the null hypothesis. It is very plausible that Kobe Bryant's free throws are both independent and identically distributed. 
 
 \includepdf{Stat+665+HW2+Prob+3_9.pdf}
 
