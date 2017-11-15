@@ -1,0 +1,63 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{txfonts}
+\usepackage{titlesec}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{bm}
+
+\setlength{\parskip}{\baselineskip}%
+\setlength{\parindent}{0pt}%
+
+\title{Homework 3}
+\author{Daniel Hartig}
+
+
+\begin{document}
+\maketitle
+
+\titlespacing{\subsection}{0pt}{0pt}{0pt}
+\titlespacing{\subsubsection}{0pt}{0pt}{-\parskip}
+
+\subsection{Problem 4.3}
+The book uses a somewhat unusual linear regression with a binomial variance function and identity link function. This combination is not supported by {\tt statsmodel}, the GLM package for use with python, so I recomputed the linear regressions using the default Gaussian variance function and identity link. While the numbers are different, the analysis should be the same for both variance-link parings. The results of the regression for the four scoring choices (including the scoring used in 4.2.2 of the book) are show in the table:
+
+\begin{center}
+\begin{tabular}{l c c c c}
+&(0, 2, 4, 5)&(0, 2, 4, 6)&(0, 1, 2, 3)&(1, 2, 3, 4) \\\hline
+Never&0.01631&0.02036&0.02036&0.02036 \\ 
+Occasionally&0.05699&0.05495&0.05495&0.05495 \\
+Nearly every night&0.09766&0.08953&0.08953&0.08953 \\ 
+Every night&0.11800&0.12412&0.12412&0.12412\\\hline
+$\hat{\beta}$&0.02034&0.01729&0.03459&0.03459 \\
+Intercept&0.01631&0.02036&0.02036&-0.01422
+\end{tabular}
+\end{center}
+
+The predicted values for all three scoring choices are identical. We can see the reasons why from looking at the $\hat{\beta}$ and intercept. For $(0, 1, 2, 3)$ and $(0, 2, 4, 6)$, the second is a multiple (by two) of the first, so the intercepts are identical while the slope of the second is twice that of the first. For $(0, 1, 2, 3)$ and $(1, 2, 3, 4)$, the second is the first translated by one, so the slopes are identical (due to identical spacing between the scores) while the intercept for the second is smaller to translate the best fit line.
+
+\subsection{Problem 4.7}
+
+Included as Appendix A
+
+\subsection{Problem 4.30}
+\subsubsection{a.}
+$\hat{\beta}$ is a value that will maximize $L(\beta)$. Therefore $\hat{\beta}$ is a stationary point of the function $L(\beta)$, so $L'(\hat{\beta})$ is expected to be zero. Therefore, it follows from the second order Taylor expansion that \[L'(\hat{\beta}) = 0 = L'\left(\beta^{(0)}\right) + \left(\hat{\beta}-\beta^{(0)}\right)L''\left(\beta^{(0)}\right).\] 
+
+From here, we solve for $\hat{\beta}$, which in this case is the best approximation for the current iteration, or $\beta^{(1)}$
+\[\beta^{(1)} = \beta^{(0)} - \frac{L'\left(\beta^{(0)}\right)}{L''\left(\beta^{(0)}\right)}\]
+\subsubsection{b.}
+Formula 4.45 of the text states that
+\[\bm{\beta}^{(t+1)} = \bm{\beta}^{(t)}-\left(\bm{H}^{(t)}\right)^{-1}\bm{u}^{(t)}.\]
+For a length one vector of $\bm{\beta}$; that is $\bm{\beta}=\beta$, we can re-write 
+\begin{align*}
+\bm{H} &= \frac{\partial^2L(\beta)}{\partial\beta^2} = L''(\beta)\\
+\bm{H}^{-1} &= \frac{1}{L''(\beta)} \\ \\
+\bm{u} &= \frac{\partial L(\beta)}{\partial\beta} = L'(\beta)
+\end{align*}
+Plugging these into 4.45 yields
+\[\beta^{(t+1)} = \beta^{(t)} - \frac{L'(\beta^{(t)})}{L''(\beta^{(t)})}\]
+
+
+
+\end{document}
