@@ -74,7 +74,7 @@ def read_housing():
             data[zcode] = {'hunits': int(line[1]), 
                             'hvacany': int(line[2]), 
                             'sing_det': int(line[3]),
-                            'hunits_attached': int(line[4]),
+                            'sing_att': int(line[4]),
                             'duplex': int(line[5]),
                             'three_four': int(line[6]),
                             'five_nine': int(line[7]), 
